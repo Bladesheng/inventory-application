@@ -1,13 +1,20 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
+import mongoose from "mongoose";
 
 import newRouter, { messages } from "./routes/new";
 
 dotenv.config();
 
+const mongoDB = process.env.MONGODB_URI;
+mongoose.connect(mongoDB);
+const db = mongoose.connection;
+db.on("error", () => {
+  console.error("MongoDB connection error");
+});
+
 const app = express();
-const port = process.env.PORT;
 
 app.set("view engine", "ejs");
 
@@ -24,6 +31,7 @@ app.use((req: Request, res: Response) => {
   res.sendFile(path.resolve("public/404.html"));
 });
 
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
