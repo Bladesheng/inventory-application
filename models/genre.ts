@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const Schema = mongoose.Schema;
+export interface IGenre {
+  name: string;
+}
 
-export const GenreSchema = new Schema({
+export const GenreSchema = new Schema<IGenre>({
   name: { type: String, required: true }
 });
 

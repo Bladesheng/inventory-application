@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const Schema = mongoose.Schema;
+export interface ITag {
+  name: string;
+}
 
-export const TagSchema = new Schema({
+export const TagSchema = new Schema<ITag>({
   name: { type: String, required: true }
 });
 

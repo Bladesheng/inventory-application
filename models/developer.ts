@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const Schema = mongoose.Schema;
+export interface IDeveloper {
+  name: string;
+  country: string;
+  date_founded: Date;
+}
 
-export const DeveloperSchema = new Schema({
+export const DeveloperSchema = new Schema<IDeveloper>({
   name: { type: String, required: true },
-  country: { type: String },
-  date_founded: { type: Date }
+  country: { type: String, required: true },
+  date_founded: { type: Date, required: true }
 });
 
 DeveloperSchema.virtual("url").get(function () {

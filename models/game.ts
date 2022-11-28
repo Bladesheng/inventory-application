@@ -1,8 +1,16 @@
-import mongoose from "mongoose";
+import { Schema, Types } from "mongoose";
 
-const Schema = mongoose.Schema;
+export interface IGame {
+  name: string;
+  release_date: Date;
+  finished_date?: Date;
+  rating?: number;
+  developer: Types.ObjectId;
+  genre: Types.ObjectId;
+  tag?: [Types.ObjectId];
+}
 
-export const GameSchema = new Schema({
+export const GameSchema = new Schema<IGame>({
   name: { type: String, required: true },
   release_date: { type: Date, required: true },
   finished_date: { type: Date, default: Date.now },
