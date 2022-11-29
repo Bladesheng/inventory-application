@@ -1,4 +1,4 @@
-import { Schema, Types } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 export interface IGame {
   name: string;
@@ -10,7 +10,7 @@ export interface IGame {
   tag?: [Types.ObjectId];
 }
 
-export const GameSchema = new Schema<IGame>({
+const GameSchema = new Schema<IGame>({
   name: { type: String, required: true },
   release_date: { type: Date, required: true },
   finished_date: { type: Date, default: Date.now },
@@ -19,6 +19,8 @@ export const GameSchema = new Schema<IGame>({
   genre: { type: Schema.Types.ObjectId, ref: "Genre", required: true },
   tag: [{ type: Schema.Types.ObjectId, ref: "Tag" }]
 });
+
+export const Game = model<IGame>("Game", GameSchema);
 
 GameSchema.virtual("url").get(function () {
   return `/games/game/${this._id}`;
