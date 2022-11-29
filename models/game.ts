@@ -20,8 +20,8 @@ const GameSchema = new Schema<IGame>({
   tag: [{ type: Schema.Types.ObjectId, ref: "Tag" }]
 });
 
-export const Game = model<IGame>("Game", GameSchema);
-
 GameSchema.virtual("url").get(function () {
   return `/games/game/${this._id}`;
 });
+
+export const Game = model<IGame>("Game", GameSchema);

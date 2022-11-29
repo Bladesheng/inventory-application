@@ -12,8 +12,8 @@ const DeveloperSchema = new Schema<IDeveloper>({
   date_founded: { type: Date, required: true }
 });
 
-export const Developer = model<IDeveloper>("Developer", DeveloperSchema);
-
 DeveloperSchema.virtual("url").get(function () {
   return `/games/developer/${this._id}`;
 });
+
+export const Developer = model<IDeveloper>("Developer", DeveloperSchema);
