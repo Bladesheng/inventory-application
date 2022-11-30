@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import path from "path";
 import mongoose from "mongoose";
 
-import newRouter, { messages } from "./routes/new";
+import indexRouter from "./routes/index";
+import collectionRouter from "./routes/collection";
 
 dotenv.config();
 
@@ -18,13 +19,8 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.get("/", (req: Request, res: Response) => {
-  res.render("pages/index", {
-    messages: messages
-  });
-});
-
-app.use("/new", newRouter);
+app.use("/", indexRouter);
+app.use("/collection", collectionRouter);
 
 app.use((req: Request, res: Response) => {
   res.status(404);
