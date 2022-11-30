@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("../partials/head", {title: "Messages Board"}) %>
+  <%- include("../partials/head", {title}) %>
 
   <body>
-    <a href="/new">New Message</a>
-    <ol>
-      <% messages.forEach((message) => { %>
+    <ul>
+      <% games.forEach((game) => { %>
       <li>
-        <h2><%= message.user %></h2>
-        <p class="text"><%= message.text %></p>
-        <% const hours = String(message.added.getHours()).padStart(2, "0")%> <% const minutes =
-        String(message.added.getMinutes()).padStart(2, "0") %>
-        <p class="date"><%= `${hours}:${minutes}` %></p>
+        <p><%= game.name %></p>
+        <p><%= game.rating %></p>
       </li>
       <% }) %>
-    </ol>
+    </ul>
 
     <%- include("../partials/footer") %>
   </body>
