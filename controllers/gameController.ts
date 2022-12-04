@@ -1,9 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 
-import { Developer } from "../models/developer";
 import { Game } from "../models/game";
+import "../models/developer";
+import { Developer } from "../models/developer";
+import "../models/genre";
 import { Genre } from "../models/genre";
+import "../models/tag";
 import { Tag } from "../models/tag";
 
 interface ResponseError extends Error {
@@ -25,7 +28,11 @@ export async function index(req: Request, res: Response, next: NextFunction) {
 
 export async function gameDetail(req: Request, res: Response, next: NextFunction) {
   try {
-    const game = await Game.findById(req.params.id).exec();
+    const game = await Game.findById(req.params.id)
+      .populate("genre")
+      .populate("developer")
+      .populate("tag")
+      .exec();
 
     if (game === null) {
       const err: ResponseError = new Error("Book not found");

@@ -5,6 +5,18 @@
   <body>
     <h1><%= game.name %></h1>
 
+    <p><%= game.genre.name %></p>
+    <p><%= game.release_date %></p>
+    <p><%= game.developer.name %></p>
+    <ul>
+      <% for (const tag of game.tag) { %>
+      <li><%= tag.name%></li>
+      <% } %>
+    </ul>
+
+    <p><%= game.rating %> / 5</p>
+    <p><%= game.finished_date %></p>
+
     <%- include("../partials/footer") %>
   </body>
 </html>
