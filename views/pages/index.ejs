@@ -6,7 +6,7 @@
     <ul>
       <% games.forEach((game) => { %>
       <li>
-        <p><%= game.name %></p>
+        <a href="<%= game.url %> "><%= game.name %></a>
         <p><%= game.rating %></p>
       </li>
       <% }) %>

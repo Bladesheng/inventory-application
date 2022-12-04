@@ -21,7 +21,7 @@ const GameSchema = new Schema<IGame>({
 });
 
 GameSchema.virtual("url").get(function () {
-  return `/games/game/${this._id}`;
+  return `/collection/game/${this._id}`;
 });
 
 export const Game = model<IGame>("Game", GameSchema);
