@@ -1,4 +1,3 @@
-import async from "async";
 import { Request, Response, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 
@@ -12,24 +11,17 @@ interface ResponseError extends Error {
 }
 
 export const gameController = (() => {
-  function index(req: Request, res: Response, next: NextFunction) {
-    async.parallel(
-      {
-        gamesList(callback) {
-          Game.find({}, "name rating").exec(callback);
-        }
-      },
-      (err, results) => {
-        if (err) {
-          return next(err);
-        }
+  async function index(req: Request, res: Response, next: NextFunction) {
+    try {
+      const games = await Game.find({}, "name rating").exec();
 
-        res.render("pages/index", {
-          title: "Home",
-          games: results.gamesList
-        });
-      }
-    );
+      res.render("pages/collection", {
+        title: "Home",
+        games: games
+      });
+    } catch (err) {
+      return next(err);
+    }
   }
 
   async function gameDetail(req: Request, res: Response, next: NextFunction) {
