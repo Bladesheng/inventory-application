@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
+import { ResponseError } from "../utils/utils";
 
 import { Game } from "../models/game";
 import "../models/developer";
@@ -8,10 +9,6 @@ import "../models/genre";
 import { Genre } from "../models/genre";
 import "../models/tag";
 import { Tag } from "../models/tag";
-
-interface ResponseError extends Error {
-  status?: number;
-}
 
 export async function index(req: Request, res: Response, next: NextFunction) {
   try {
