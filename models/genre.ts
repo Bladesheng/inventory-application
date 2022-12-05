@@ -9,7 +9,7 @@ const GenreSchema = new Schema<IGenre>({
 });
 
 GenreSchema.virtual("url").get(function () {
-  return `/games/genre/${this._id}`;
+  return `/collection/genre/${this._id}`;
 });
 
 export const Genre = model<IGenre>("Genre", GenreSchema);
