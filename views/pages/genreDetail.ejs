@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head", {title}) %> <%- include("../partials/navbar") %>
+
+  <body>
+    <h2><%= genre.name %> games</h2>
+    <ul>
+      <% games.forEach((game) => { %>
+      <li>
+        <a href="<%= game.url %> "><%= game.name %></a>
+      </li>
+      <% }) %>
+    </ul>
+
+    <%- include("../partials/footer") %>
+  </body>
+</html>

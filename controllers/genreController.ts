@@ -22,3 +22,26 @@ export async function index(req: Request, res: Response, next: NextFunction) {
     return next(err);
   }
 }
+
+export async function genreDetail(req: Request, res: Response, next: NextFunction) {
+  try {
+    const [genre, games] = await Promise.all([
+      Genre.findById(req.params.id).exec(),
+      Game.find({ genre: req.params.id }).exec()
+    ]);
+
+    if (genre === null) {
+      const err: ResponseError = new Error("Developer not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    res.render("pages/genreDetail", {
+      title: genre.name,
+      genre: genre,
+      games: games
+    });
+  } catch (err) {
+    return next(err);
+  }
+}

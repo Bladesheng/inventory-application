@@ -16,6 +16,7 @@ router.get("/developer/:id", developerController.developerDetail);
 
 // Genre routes
 router.get("/genres", genreController.index);
+router.get("/genre/:id", genreController.genreDetail);
 
 // Tag routes
 router.get("/tags", tagController.index);
