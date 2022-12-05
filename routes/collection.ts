@@ -20,5 +20,6 @@ router.get("/genre/:id", genreController.genreDetail);
 
 // Tag routes
 router.get("/tags", tagController.index);
+router.get("/tag/:id", tagController.tagDetail);
 
 export default router;
