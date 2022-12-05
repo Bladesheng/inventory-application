@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import mongoose from "mongoose";
+import morgan from "morgan";
 
 import indexRouter from "./routes/index";
 import collectionRouter from "./routes/collection";
@@ -19,6 +20,8 @@ const app = express();
 
 app.set("view engine", "ejs");
 
+app.use(morgan("dev"));
+
 app.use("/", indexRouter);
 app.use("/collection", collectionRouter);
 
@@ -29,5 +32,5 @@ app.use((req: Request, res: Response) => {
 
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+  console.log(`[server] Server is running at http://localhost:${port}`);
 });
