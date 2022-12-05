@@ -22,3 +22,26 @@ export async function index(req: Request, res: Response, next: NextFunction) {
     return next(err);
   }
 }
+
+export async function developerDetail(req: Request, res: Response, next: NextFunction) {
+  try {
+    const [developer, games] = await Promise.all([
+      Developer.findById(req.params.id).exec(),
+      Game.find({ developer: req.params.id }).exec()
+    ]);
+
+    if (developer === null) {
+      const err: ResponseError = new Error("Developer not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    res.render("pages/developerDetail", {
+      title: developer.name,
+      developer: developer,
+      games: games
+    });
+  } catch (err) {
+    return next(err);
+  }
+}

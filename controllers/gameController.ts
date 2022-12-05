@@ -37,7 +37,7 @@ export async function gameDetail(req: Request, res: Response, next: NextFunction
       return next(err);
     }
 
-    res.render("pages/gameDetails", {
+    res.render("pages/gameDetail", {
       title: game.name,
       game: game
     });
