@@ -9,7 +9,7 @@ const TagSchema = new Schema<ITag>({
 });
 
 TagSchema.virtual("url").get(function () {
-  return `/games/tag/${this._id}`;
+  return `/collection/tag/${this._id}`;
 });
 
 export const Tag = model<ITag>("Tag", TagSchema);
