@@ -45,3 +45,22 @@ export async function gameDetail(req: Request, res: Response, next: NextFunction
     return next(err);
   }
 }
+
+export async function gameNew_get(req: Request, res: Response, next: NextFunction) {
+  try {
+    const [developers, genres, tags] = await Promise.all([
+      Developer.find({}, "name").exec(),
+      Genre.find({}, "name").exec(),
+      Tag.find({}, "name").exec()
+    ]);
+
+    res.render("pages/gameForm", {
+      title: "New game",
+      developers,
+      genres,
+      tags
+    });
+  } catch (err) {
+    return next(err);
+  }
+}

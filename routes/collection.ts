@@ -8,6 +8,7 @@ import * as tagController from "../controllers/tagController";
 
 // Game routes
 router.get("/", gameController.index);
+router.get("/game/create", gameController.gameNew_get);
 router.get("/game/:id", gameController.gameDetail);
 
 // Developer routes

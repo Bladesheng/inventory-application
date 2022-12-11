@@ -5,6 +5,10 @@
   <body>
     <%- include("../partials/navbar") %>
 
+    <form method="get" action="/collection/game/create">
+      <button type="submit">+ New game</button>
+    </form>
+
     <ul>
       <% games.forEach((game) => { %>
       <li>
