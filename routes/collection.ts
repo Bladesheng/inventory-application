@@ -11,6 +11,8 @@ router.get("/", gameController.index);
 router.get("/game/create", gameController.gameNew_get);
 router.get("/game/:id", gameController.gameDetail);
 
+router.post("/game/create", gameController.gameNew_post);
+
 // Developer routes
 router.get("/developers", developerController.index);
 router.get("/developer/:id", developerController.developerDetail);

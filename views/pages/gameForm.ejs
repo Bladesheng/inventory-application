@@ -10,27 +10,38 @@
         <legend>Game information</legend>
 
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" required />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          required
+          value="<%= locals.game === undefined ? '' : game.name %> "
+        />
 
         <label for="release_date">Release date</label>
-        <input type="date" name="release_date" id="release_date" required />
+        <input
+          type="date"
+          name="release_date"
+          id="release_date"
+          required
+          value="<%= locals.game === undefined ? '' : new Date(game.release_date).toISOString().substr(0, 10)%>"
+        />
 
         <label for="developer">Developer</label>
         <select name="developer" id="developer" required>
           <option value="">--Please choose and option--</option>
 
-          <% developers.forEach((developer) => { %>
-          <option value="<%= developer._id %>"><%= developer.name %></option>
-          <% }) %>
+          <% developers.forEach((developer) => { %> <option value="<%= developer._id %>"
+          <%=developer._id.toString() === game.developer.toString() ? 'selected' : '' %> >
+          <%=developer.name %> <% }) %>
         </select>
 
         <label for="genre">Genre</label>
         <select name="genre" id="genre" required>
           <option value="">--Please choose and option--</option>
 
-          <% genres.forEach((genre) => { %>
-          <option value="<%= genre._id %>"><%= genre.name %></option>
-          <% }) %>
+          <% genres.forEach((genre) => { %> <option value="<%= genre._id %>" <%=genre._id.toString()
+          === game.genre.toString() ? 'selected' : '' %>><%= genre.name %> <% }) %>
         </select>
 
         <fieldset>
@@ -38,7 +49,8 @@
 
           <% tags.forEach((tag) => { %>
           <div>
-            <input type="checkbox" name="<%= tag._id %>" id="<%= 'ID' + tag._id %>" />
+            <input type="checkbox" name="tags" id="<%= 'ID' + tag._id %>" value="<%= tag._id %>"
+            <%=tag._id.toString() === game.tag.toString() ? 'checked' : '' %>/>
             <label for="<%= 'ID' + tag._id %>"><%= tag.name %></label>
           </div>
           <% }) %>
@@ -77,6 +89,12 @@
       <button type="submit">Add game</button>
     </form>
 
-    <%- include("../partials/footer") %>
+    <% if (locals.errors) { %>
+    <div class="errors">
+      <% errors.forEach((error) => { %>
+      <p><b><%= error.msg %></b></p>
+      <% }) %>
+    </div>
+    <% } %> <%- include("../partials/footer") %>
   </body>
 </html>

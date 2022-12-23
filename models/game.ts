@@ -1,6 +1,7 @@
 import { Schema, Types, model } from "mongoose";
 
 export interface IGame {
+  _id: Types.ObjectId;
   name: string;
   release_date: Date;
   finished_date?: Date;
